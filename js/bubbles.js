@@ -17,7 +17,7 @@ var Bubbles = function(numBubblesToMake){
 				top: 1300+(Math.random()-.5)*300,
 				left: 200+(Math.random()-.5)*1000,
 				webkitTransform: 'scale3d(' + scale +  ',' + scale + ',1)',
-				backgroundImage: 'url(gfx/bubbles/' + (curIndex++%25) + '.png)',
+				backgroundImage: 'url(gfx/bubbles/' + (curIndex++%(numNames+1)) + '.png)',
 				backgroundSize: '100% 100%',
 				zIndex: Math.round(scale*1000)
 			})
@@ -40,6 +40,7 @@ var Bubbles = function(numBubblesToMake){
 
 			if( el.offset().top + el.height() < -10 ){
 				// Remove the item from the list
+				el.remove()
 				list.splice(i, 1)
 				self.create()
 
