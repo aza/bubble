@@ -4,7 +4,7 @@ var Bubbles = function(numBubblesToMake){
 			numNames = 24
 
 	this.create = function(){
-		var scale = (Math.random())
+		var scale = Math.min(Math.random()+.2, 1)
 		var b = $('<div>')
 			.attr({
 				class:'bubble',
