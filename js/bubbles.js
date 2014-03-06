@@ -1,7 +1,8 @@
 var Bubbles = function(numBubblesToMake){
 	var list = [],
 			self = this,
-			numNames = 24
+			numNames = 25,
+			curIndex = 0
 
 	this.create = function(){
 		var scale = Math.min(Math.random()+.2, 1)
@@ -13,17 +14,17 @@ var Bubbles = function(numBubblesToMake){
 				scale: scale
 			})
 			.css({
-				top: 1100+(Math.random()-.5)*200,
-				left: 300+(Math.random()-.5)*1000,
+				top: 1300+(Math.random()-.5)*300,
+				left: 200+(Math.random()-.5)*1000,
 				webkitTransform: 'scale3d(' + scale +  ',' + scale + ',1)',
-				backgroundImage: 'url(gfx/bubbles/' + Math.round(Math.random()*numNames) + '.png)',
+				backgroundImage: 'url(gfx/bubbles/' + (curIndex++%25) + '.png)',
 				backgroundSize: '100% 100%',
 				zIndex: Math.round(scale*1000)
 			})
 			.appendTo('.bubbles')
 
 		if( scale < .5 ){
-			b.css({opacity: scale+.5})
+			//b.css({opacity: scale+.5})
 		}
 		list.push(b)
 	}
@@ -34,10 +35,10 @@ var Bubbles = function(numBubblesToMake){
 
 			el.css({
 				top: '-=' + el.attr('speed')*1.5,
-				left: '+=' + (Math.sin( time + i ) * el.attr('wobble'))/el.attr('speed')
+				left: '+=' + (Math.sin( time + parseFloat(el.attr('scale')) ) * el.attr('wobble'))/el.attr('speed')
 			})
 
-			if( el.offset().top + el.height() < 0 ){
+			if( el.offset().top + el.height() < -10 ){
 				// Remove the item from the list
 				list.splice(i, 1)
 				self.create()
